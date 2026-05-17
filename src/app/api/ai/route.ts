@@ -23,7 +23,7 @@ Generate a structured SMART goal. Return ONLY a JSON object with the following k
 
       const response = await groq.chat.completions.create({
         messages: [{ role: 'user', content: prompt }],
-        model: 'llama3-8b-8192',
+        model: 'llama-3.1-8b-instant',
       });
 
       const text = response.choices[0]?.message?.content || '{}';
@@ -38,7 +38,7 @@ Keep it concise (2-3 sentences), professional, and highlight the overall progres
 
       const response = await groq.chat.completions.create({
         messages: [{ role: 'user', content: prompt }],
-        model: 'llama3-8b-8192',
+        model: 'llama-3.1-8b-instant',
       });
 
       const text = response.choices[0]?.message?.content || '';

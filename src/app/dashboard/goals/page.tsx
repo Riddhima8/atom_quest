@@ -227,11 +227,11 @@ export default function GoalsPage() {
         </div>
       )}
 
-      {/* Create Modal */}
       {isModalOpen && (
-        <div style={{ position: 'fixed', inset: 0, backgroundColor: 'rgba(0,0,0,0.7)', backdropFilter: 'blur(4px)', display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 50 }}>
-          <div className="glass-panel" style={{ width: '100%', maxWidth: '500px', padding: '2rem', maxHeight: '90vh', overflowY: 'auto' }}>
-            <h2 style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '1.5rem' }}>Create New Goal</h2>
+        <div style={{ position: 'fixed', inset: 0, backgroundColor: 'rgba(0,0,0,0.7)', backdropFilter: 'blur(6px)', zIndex: 50, padding: '2rem 1rem', overflowY: 'auto' }}>
+          <div style={{ display: 'flex', minHeight: '100%', alignItems: 'center', justifyContent: 'center' }}>
+            <div className="glass-panel modal-animate" style={{ width: '100%', maxWidth: '550px', padding: '2.5rem' }}>
+              <h2 style={{ fontSize: '1.75rem', fontWeight: 'bold', marginBottom: '1.5rem', letterSpacing: '-0.02em' }}>Create New Goal</h2>
             <form onSubmit={handleCreateGoal} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
               {formError && <div style={{ color: 'var(--accent-color)', fontSize: '0.9rem' }}>{formError}</div>}
               
@@ -289,6 +289,7 @@ export default function GoalsPage() {
                 <button type="submit" className="btn-primary">Save Goal</button>
               </div>
             </form>
+            </div>
           </div>
         </div>
       )}
