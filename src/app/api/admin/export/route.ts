@@ -17,7 +17,7 @@ export async function GET() {
 
     // Convert to CSV
     const header = 'Goal ID,Title,Owner,Quarter,Target,UoM,Status,Achievement,Manager Comment\n'
-    const rows = checkIns.map(c => 
+    const rows = checkIns.map((c: any) => 
       `"${c.goalId}","${c.goal.title}","${c.goal.owner.username}","${c.quarter}","${c.goal.target}","${c.goal.uom}","${c.status}","${c.achievementValue || ''}","${c.managerComment || ''}"`
     ).join('\n')
 
