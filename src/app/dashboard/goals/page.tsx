@@ -131,7 +131,8 @@ export default function GoalsPage() {
   if (!user) return <p>Loading...</p>
 
   return (
-    <div className="animate-fade-in">
+    <>
+      <div className="animate-fade-in">
       <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
         <div>
           <h1 style={{ fontSize: '2rem', fontWeight: '700' }}>Goal Management</h1>
@@ -227,11 +228,13 @@ export default function GoalsPage() {
         </div>
       )}
 
-      {isModalOpen && (
-        <div style={{ position: 'fixed', inset: 0, backgroundColor: 'rgba(0,0,0,0.7)', backdropFilter: 'blur(6px)', zIndex: 50, padding: '2rem 1rem', overflowY: 'auto' }}>
-          <div style={{ display: 'flex', minHeight: '100%', alignItems: 'center', justifyContent: 'center' }}>
-            <div className="glass-panel modal-animate" style={{ width: '100%', maxWidth: '550px', padding: '2.5rem' }}>
-              <h2 style={{ fontSize: '1.75rem', fontWeight: 'bold', marginBottom: '1.5rem', letterSpacing: '-0.02em' }}>Create New Goal</h2>
+    </div>
+    {/* Create Modal */}
+    {isModalOpen && (
+      <div style={{ position: 'fixed', inset: 0, backgroundColor: 'rgba(0,0,0,0.7)', backdropFilter: 'blur(6px)', zIndex: 50, padding: '2rem 1rem', overflowY: 'auto' }}>
+        <div style={{ display: 'flex', minHeight: '100%', alignItems: 'center', justifyContent: 'center' }}>
+          <div className="glass-panel modal-animate" style={{ width: '100%', maxWidth: '550px', padding: '2.5rem' }}>
+            <h2 style={{ fontSize: '1.75rem', fontWeight: 'bold', marginBottom: '1.5rem', letterSpacing: '-0.02em' }}>Create New Goal</h2>
             <form onSubmit={handleCreateGoal} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
               {formError && <div style={{ color: 'var(--accent-color)', fontSize: '0.9rem' }}>{formError}</div>}
               
@@ -289,10 +292,10 @@ export default function GoalsPage() {
                 <button type="submit" className="btn-primary">Save Goal</button>
               </div>
             </form>
-            </div>
           </div>
         </div>
-      )}
-    </div>
+      </div>
+    )}
+  </>
   )
 }
