@@ -1,0 +1,61 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(uuid())
+  username  String   @unique
+  password  String   // In a real app, this should be hashed
+  role      String   // EMPLOYEE, MANAGER, ADMIN
+  managerId String?
+  manager   User?    @relation("ManagerToEmployee", fields: [managerId], references: [id])
+  employees User[]   @relation("ManagerToEmployee")
+  goals     Goal[]   @relation("OwnerToGoals")
+  auditLogs AuditLog[]
+}
+
+model Goal {
+  id           String     @id @default(uuid())
+  title        String
+  description  String
+  thrustArea   String
+  uom          String     // NUMERIC, PERCENTAGE, TIMELINE, ZERO
+  target       String     // Stored as string to handle dates or numbers
+  weightage    Int
+  status       String     // DRAFT, PENDING, APPROVED, RETURNED
+  ownerId      String
+  owner        User       @relation("OwnerToGoals", fields: [ownerId], references: [id])
+  sharedFromId String?    // If pushed by admin/manager
+  checkIns     CheckIn[]
+  auditLogs    AuditLog[]
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+}
+
+model CheckIn {
+  id               String   @id @default(uuid())
+  quarter          String   // Q1, Q2, Q3, Q4
+  status           String   // NOT_STARTED, ON_TRACK, COMPLETED
+  achievementValue String?
+  managerComment   String?
+  goalId           String
+  goal             Goal     @relation(fields: [goalId], references: [id])
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
+
+model AuditLog {
+  id        String   @id @default(uuid())
+  action    String
+  details   String
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  goalId    String?
+  goal      Goal?    @relation(fields: [goalId], references: [id])
+  timestamp DateTime @default(now())
+}
