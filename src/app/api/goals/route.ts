@@ -17,7 +17,7 @@ export async function GET(request: Request) {
         select: { id: true, username: true }
       })
       
-      const employeeIds = employees.map(e => e.id)
+      const employeeIds = employees.map((e: any) => e.id)
       
       const goals = await prisma.goal.findMany({
         where: { ownerId: { in: employeeIds } },
