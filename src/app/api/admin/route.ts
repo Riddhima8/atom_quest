@@ -31,9 +31,9 @@ export async function GET(request: Request) {
       // Aggregate data by Quarter
       const quarters = ['Q1', 'Q2', 'Q3', 'Q4']
       const completionRates = quarters.map(q => {
-        const checkinsForQ = checkIns.filter(c => c.quarter === q)
+        const checkinsForQ = checkIns.filter((c: any) => c.quarter === q)
         const total = checkinsForQ.length
-        const completed = checkinsForQ.filter(c => c.status === 'COMPLETED').length
+        const completed = checkinsForQ.filter((c: any) => c.status === 'COMPLETED').length
         return {
           quarter: q,
           total,
