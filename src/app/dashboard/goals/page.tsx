@@ -115,7 +115,7 @@ export default function GoalsPage() {
     setTitle(''); setDescription(''); setThrustArea(''); setUom('NUMERIC'); setTarget(''); setWeightage('10')
   }
 
-  const currentWeightage = goals.reduce((sum, g) => sum + g.weightage, 0)
+  const currentWeightage = goals.reduce((sum: number, g: any) => sum + g.weightage, 0)
   const canSubmitForApproval = currentWeightage === 100 && goals.every(g => g.status === 'DRAFT' || g.status === 'RETURNED')
 
   const submitAllForApproval = async () => {

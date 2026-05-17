@@ -67,7 +67,7 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Maximum 8 goals allowed' }, { status: 400 })
     }
 
-    const totalWeight = currentGoals.reduce((sum, g) => sum + g.weightage, 0)
+    const totalWeight = currentGoals.reduce((sum: number, g: any) => sum + g.weightage, 0)
     if (totalWeight + weight > 100) {
       return NextResponse.json({ error: `Total weightage cannot exceed 100%. You have ${100 - totalWeight}% remaining.` }, { status: 400 })
     }
